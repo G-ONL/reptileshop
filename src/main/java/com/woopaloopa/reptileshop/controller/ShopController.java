@@ -1,6 +1,6 @@
 package com.woopaloopa.reptileshop.controller;
 
-import com.woopaloopa.reptileshop.domain.ReptileShop;
+import com.woopaloopa.reptileshop.domain.shop.Shop;
 import com.woopaloopa.reptileshop.service.ShopService;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ShopController {
 
-  private final ShopService shopService;
+    private final ShopService shopService;
 
-  @GetMapping("/shops")
-  public ResponseEntity<List<ReptileShop>> selectShops() {
-    return new ResponseEntity<>(shopService.selectShops(), HttpStatus.OK);
+    @GetMapping("/shops")
+    public ResponseEntity<List<Shop>> selectShops() {
+        return new ResponseEntity<>(shopService.selectShops(), HttpStatus.OK);
 
-  }
+    }
 
 
 }

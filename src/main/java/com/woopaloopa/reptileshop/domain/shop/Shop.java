@@ -1,6 +1,8 @@
 package com.woopaloopa.reptileshop.domain.shop;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.woopaloopa.reptileshop.domain.address.Address;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,19 +20,30 @@ import lombok.NoArgsConstructor;
 public class Shop {
 
   @Id
+  @Column(name = "shopId")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long shopId;
 
   @Column(nullable = false)
   private String name;
 
-  @OneToOne
-  @JoinColumn(name = "address_id")
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "addressId")
+  @JsonBackReference
   private Address address;
 
   @Builder
   public Shop(String name, Address address) {
     this.name = name;
     this.address = address;
+  }
+
+  @Override
+  public String toString() {
+    return "Shop{" +
+        "shopId=" + shopId +
+        ", name='" + name + '\'' +
+        ", address=" + address +
+        '}';
   }
 }

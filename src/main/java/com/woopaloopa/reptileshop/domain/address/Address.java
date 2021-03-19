@@ -1,6 +1,8 @@
 package com.woopaloopa.reptileshop.domain.address;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.woopaloopa.reptileshop.domain.shop.Shop;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +18,9 @@ import lombok.NoArgsConstructor;
 public class Address {
 
     @Id
+    @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long addressId;
 
     private String zip;
     private String address1;
@@ -26,6 +29,7 @@ public class Address {
     private String region;
 
     @OneToOne(mappedBy = "address")
+    @JsonManagedReference
     private Shop shop;
 
     @Builder
@@ -35,5 +39,17 @@ public class Address {
         this.address2 = address2;
         this.city = city;
         this.region = region;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+            "addressId=" + addressId +
+            ", zip='" + zip + '\'' +
+            ", address1='" + address1 + '\'' +
+            ", address2='" + address2 + '\'' +
+            ", city='" + city + '\'' +
+            ", region='" + region + '\'' +
+            '}';
     }
 }

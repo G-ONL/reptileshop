@@ -21,14 +21,12 @@ public class ShopController {
     @GetMapping("/shops")
     public ResponseEntity<List<ShopInfoDto>> selectShops() {
         return new ResponseEntity(shopService.selectShops(), HttpStatus.OK);
-
     }
 
     @PostMapping("/shop")
     public ResponseEntity insertShop(@RequestBody ShopInfoDto shop) {
         shopService.insertShopAndAddress(shop);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 

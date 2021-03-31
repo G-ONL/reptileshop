@@ -21,6 +21,16 @@ public class ShopInfoDto {
     private String city;
     private String region;
 
+    public ShopInfoDto(Shop shop) {
+        this.id = shop.getShopId();
+        this.name = shop.getName();
+        this.address1 = shop.getAddress().getAddress1();
+        this.address2 = shop.getAddress().getAddress2();
+        this.city = shop.getAddress().getCity();
+        this.region = shop.getAddress().getRegion();
+        this.zip = shop.getAddress().getZip();
+    }
+
     public Shop toShopEntity() {
         Address address = toAddressEntity();
         return Shop.builder()

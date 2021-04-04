@@ -1,5 +1,6 @@
 package com.woopaloopa.reptileshop.controller;
 
+//import com.woopaloopa.reptileshop.crwaling.ShopCrawling;
 import com.woopaloopa.reptileshop.dto.ShopInfoDto;
 import com.woopaloopa.reptileshop.service.ShopService;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShopController {
 
     private final ShopService shopService;
-    private final ShopCrawling shopCrawling;
+//    private final ShopCrawling shopCrawling;
 
     @GetMapping("/shops")
     @ApiOperation(value = "selectShops", tags = "selectShops")
@@ -32,5 +33,9 @@ public class ShopController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+//    @GetMapping("/shopCrawling")
+//    public ResponseEntity insertShop() {
+//        shopCrawling.startCrawling();
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }

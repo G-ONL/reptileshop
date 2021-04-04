@@ -22,12 +22,13 @@ public class ShopController {
 //    private final ShopCrawling shopCrawling;
 
     @GetMapping("/shops")
-    @ApiOperation(value = "selectShops", tags = "selectShops")
+    @ApiOperation(value = "Shop 목록", notes = "샵의 목록을 불러옵니다.", tags = "SHOP")
     public ResponseEntity<List<ShopInfoDto>> selectShops() {
         return new ResponseEntity(shopService.selectShops(), HttpStatus.OK);
     }
 
     @PostMapping("/shop")
+    @ApiOperation(value = "Shop 입력", notes = "샵 입력을 합니다.", tags = "SHOP")
     public ResponseEntity insertShop(@RequestBody ShopInfoDto shop) {
         shopService.insertShopAndHomepage(shop);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -1,6 +1,7 @@
 package com.woopaloopa.reptileshop.domain.homepage;
 
 import com.woopaloopa.reptileshop.domain.shop.Shop;
+import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,8 +26,10 @@ public class Homepage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long homepageId;
 
+    @ApiModelProperty(example = "인스타그램", name = "홈페이지 타입")
     private String type;
 
+    @ApiModelProperty(example = "http://www.newrungop.com", name = "홈페이지 주소")
     private String address;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -57,26 +57,21 @@ public class ShopRepositoryTest {
 
         homepages.add(homepage1);
         Shop shop1 = Shop.builder()
-            .name("더쥬")
+            .name(name)
             .lotNumberAddress(streetNameAddress)
             .streetNameAddress(lotNumberAddress)
-            .homepages(homepages)
             .time(time)
             .info(info)
             .build();
-
+        shop1.addHomepage(homepage1);
         shopRepository.save(shop1);
-        homepageRepository.save(homepage1);
     }
 
     @Test
     void 샵의_목록을_보여준다() {
         샵_데이터_넣기();
-
         List<Shop> shops = shopRepository.findAll();
-
         Assertions.assertEquals(shops.size(), 1);
         Assertions.assertEquals(shops.get(0).getName(), "더쥬");
-        Assertions.assertEquals(shops.get(0).getHomepages().size(), 1);
     }
 }

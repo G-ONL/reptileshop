@@ -2,6 +2,7 @@ package com.woopaloopa.reptileshop.controller;
 
 import com.woopaloopa.reptileshop.dto.ShopInfoDto;
 import com.woopaloopa.reptileshop.service.ShopService;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShopController {
 
     private final ShopService shopService;
+    private final ShopCrawling shopCrawling;
 
     @GetMapping("/shops")
+    @ApiOperation(value = "selectShops", tags = "selectShops")
     public ResponseEntity<List<ShopInfoDto>> selectShops() {
         return new ResponseEntity(shopService.selectShops(), HttpStatus.OK);
     }

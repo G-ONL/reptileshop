@@ -35,8 +35,11 @@ public class Shop {
     @Column
     private String lotNumberAddress;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String time;
+
+    @Column
+    private String phoneNumber;
 
     @Column
     private String info;
@@ -46,12 +49,13 @@ public class Shop {
 
     @Builder
     public Shop(String name, String streetNameAddress, String lotNumberAddress, String time,
-        String info, List<Homepage> homepages) {
+        String info, String phoneNumber, List<Homepage> homepages) {
         this.name = name;
         this.streetNameAddress = streetNameAddress;
         this.lotNumberAddress = lotNumberAddress;
         this.time = time;
         this.info = info;
+        this.phoneNumber = phoneNumber;
         this.homepages = homepages == null ? new ArrayList<>() : homepages;
     }
 

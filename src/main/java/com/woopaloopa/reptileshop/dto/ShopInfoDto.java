@@ -20,11 +20,17 @@ public class ShopInfoDto {
     private String lotNumberAddress;
     private String time;
     private String info;
+    private String phoneNumber;
     private List<HomepageInfoDto> homepageList;
 
     public ShopInfoDto(Shop shop) {
         this.id = shop.getShopId();
         this.name = shop.getName();
+        this.streetNameAddress = shop.getStreetNameAddress();
+        this.lotNumberAddress = shop.getLotNumberAddress();
+        this.time = shop.getTime();
+        this.info = shop.getInfo();
+        this.phoneNumber = shop.getPhoneNumber();
         this.homepageList = shop.getHomepages().stream().map(HomepageInfoDto::new).collect(
             Collectors.toList());
     }
@@ -37,6 +43,7 @@ public class ShopInfoDto {
             .lotNumberAddress(lotNumberAddress)
             .time(time)
             .info(info)
+            .phoneNumber(phoneNumber)
             .build();
         homepageList.stream()
             .map(HomepageInfoDto::toHomepageEntity).collect(

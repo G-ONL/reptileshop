@@ -1,7 +1,8 @@
 package com.woopaloopa.reptileshop.dto;
 
-import com.woopaloopa.reptileshop.domain.address.Address;
 import com.woopaloopa.reptileshop.domain.shop.Shop;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,37 +16,32 @@ public class ShopInfoDto {
 
     private Long id;
     private String name;
-    private String zip;
-    private String address1;
-    private String address2;
-    private String city;
-    private String region;
+    private String streetNameAddress;
+    private String lotNumberAddress;
+    private String time;
+    private String info;
+    private List<HomepageInfoDto> homepageList;
 
     public ShopInfoDto(Shop shop) {
         this.id = shop.getShopId();
         this.name = shop.getName();
-        this.address1 = shop.getAddress().getAddress1();
-        this.address2 = shop.getAddress().getAddress2();
-        this.city = shop.getAddress().getCity();
-        this.region = shop.getAddress().getRegion();
-        this.zip = shop.getAddress().getZip();
+        this.homepageList = shop.getHomepages().stream().map(HomepageInfoDto::new).collect(
+            Collectors.toList());
     }
 
     public Shop toShopEntity() {
-        Address address = toAddressEntity();
-        return Shop.builder()
+
+        Shop shop = Shop.builder()
             .name(name)
-            .address(address)
+            .streetNameAddress(streetNameAddress)
+            .lotNumberAddress(lotNumberAddress)
+            .time(time)
+            .info(info)
             .build();
+        homepageList.stream()
+            .map(HomepageInfoDto::toHomepageEntity).collect(
+            Collectors.toList()).forEach(homepage -> shop.addHomepage(homepage));
+        return shop;
     }
 
-    public Address toAddressEntity() {
-        return Address.builder()
-            .address1(address1)
-            .address2(address2)
-            .city(city)
-            .region(region)
-            .zip(zip)
-            .build();
-    }
 }

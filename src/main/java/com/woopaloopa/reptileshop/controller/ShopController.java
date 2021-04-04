@@ -25,7 +25,7 @@ public class ShopController {
 
     @PostMapping("/shop")
     public ResponseEntity insertShop(@RequestBody ShopInfoDto shop) {
-        shopService.insertShopAndAddress(shop);
+        shopService.insertShopAndHomepage(shop);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

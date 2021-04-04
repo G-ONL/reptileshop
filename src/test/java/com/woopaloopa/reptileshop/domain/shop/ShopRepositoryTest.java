@@ -1,7 +1,8 @@
 package com.woopaloopa.reptileshop.domain.shop;
 
-import com.woopaloopa.reptileshop.domain.address.Address;
-import com.woopaloopa.reptileshop.domain.address.AddressRepository;
+import com.woopaloopa.reptileshop.domain.homepage.Homepage;
+import com.woopaloopa.reptileshop.domain.homepage.HomepageRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +20,7 @@ public class ShopRepositoryTest {
     private ShopRepository shopRepository;
 
     @Autowired
-    private AddressRepository addressRepository;
+    private HomepageRepository homepageRepository;
 
     @AfterEach
     public void cleanUp() {
@@ -42,36 +43,30 @@ public class ShopRepositoryTest {
     }
 
     void 샵_데이터_넣기() {
-        String city = "군포시";
-        String address1 = "경기도 군포시 산본천로 211";
-        String address2 = "경기도 군포시 산본동 91-41 지하1층";
-        String region = "경기도";
-        String zip = "15806";
         String name = "더쥬";
-        Address testAddress = Address.builder()
-            .city(city)
-            .address1(address1)
-            .address2(address2)
-            .region(region)
-            .zip(zip)
+        String streetNameAddress = "경기도 군포시 산본천로 211";
+        String lotNumberAddress = "경기도 군포시 산본동 91-41 지하1층";
+        String homepage = "https://xn--9m1b023b.com/";
+        String time = "매일 10:00 ~ 21:00";
+        String info = "더쥬 입니다.";
+        List<Homepage> homepages = new ArrayList<>();
+        Homepage homepage1 = Homepage.builder()
+            .type("홈페이지")
+            .address(homepage)
             .build();
-        Address testAddress2 = Address.builder()
-            .city(city)
-            .address1(address1)
-            .address2(address2)
-            .region(region)
-            .zip(zip)
-            .build();
+
+        homepages.add(homepage1);
         Shop shop1 = Shop.builder()
             .name("더쥬")
-            .address(testAddress)
+            .lotNumberAddress(streetNameAddress)
+            .streetNameAddress(lotNumberAddress)
+            .homepages(homepages)
+            .time(time)
+            .info(info)
             .build();
-        Shop shop2 = Shop.builder()
-            .name("하마")
-            .address(testAddress2)
-            .build();
+
         shopRepository.save(shop1);
-        shopRepository.save(shop2);
+        homepageRepository.save(homepage1);
     }
 
     @Test
@@ -80,7 +75,8 @@ public class ShopRepositoryTest {
 
         List<Shop> shops = shopRepository.findAll();
 
-        Assertions.assertEquals(shops.size(), 2);
+        Assertions.assertEquals(shops.size(), 1);
         Assertions.assertEquals(shops.get(0).getName(), "더쥬");
+        Assertions.assertEquals(shops.get(0).getHomepages().size(), 1);
     }
 }
